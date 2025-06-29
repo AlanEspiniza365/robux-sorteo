@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sorteo de Robux</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      animation: fadeIn 1s ease-in-out;
+    }
+    input, button {
+      padding: 12px;
+      margin-top: 1rem;
+      width: 80%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #00b300;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    #response {
+      margin-top: 1rem;
+      color: #333;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="logo.png" alt="Logo" style="width: 100px; margin-bottom: 1rem;">
+    <h2>¡Participa en el Sorteo de Robux!</h2>
+    <p>Ingresa tu nombre de usuario de Roblox:</p>
+    <input type="text" id="usuario" placeholder="Ej: AlexGamer123"/>
+    <button onclick="enviar()">Participar</button>
+    <p id="response"></p>
+  </div>
+
+  <script>
+    function enviar() {
+      const usuario = document.getElementById("usuario").value.trim();
+      const responseEl = document.getElementById("response");
+
+      if (usuario === "") {
+        responseEl.textContent = "Por favor ingresa tu nombre de usuario.";
+        return;
+      }
+
+      fetch("TU_URL_DEL_SCRIPT", {
+        method: "POST",
+        body: new URLSearchParams({ usuario })
+      })
+      .then(res => res.text())
+      .then(data => {
+        responseEl.textContent = "¡Te has registrado correctamente!";
+      })
+      .catch(err => {
+        responseEl.textContent = "Error al enviar. Intenta más tarde.";
+      });
+    }
+  </script>
+</body>
+</html>
